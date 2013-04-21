@@ -38,24 +38,27 @@ public class MainFrame extends JFrame {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
-			SnakeElem elem = Snake.sl.get(0);
-			switch (key) {
-				case KeyEvent.VK_UP:
-					if(elem.z != 2) elem.z = 0;
-					break;
-				case KeyEvent.VK_DOWN:
-					if(elem.z != 0) elem.z = 2;
-					break;
-				case KeyEvent.VK_LEFT:
-					if(elem.z != 1) elem.z = 3;
-					break;
-				case KeyEvent.VK_RIGHT:
-					if(elem.z != 3) elem.z = 1;
-					break;
-				default:
-					break;
+			if(Snake.isMove) {
+				Snake.isMove = false;
+				SnakeElem elem = Snake.sl.get(0);
+				switch (key) {
+					case KeyEvent.VK_UP:
+						if(elem.z != 2) elem.z = 0;
+						break;
+					case KeyEvent.VK_DOWN:
+						if(elem.z != 0) elem.z = 2;
+						break;
+					case KeyEvent.VK_LEFT:
+						if(elem.z != 1) elem.z = 3;
+						break;
+					case KeyEvent.VK_RIGHT:
+						if(elem.z != 3) elem.z = 1;
+						break;
+					default:
+						break;
+				}
+				Snake.sl.set(0, elem);
 			}
-			Snake.sl.set(0, elem);
 		}
 		@Override
 		public void keyReleased(KeyEvent arg0) {

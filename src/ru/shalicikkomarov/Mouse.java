@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class Mouse {
-	private int imx, imy, mx, my, k, ncadr;
+	public int imx, imy, mx, my, k, ncadr;
 	private long nowTime = 0, lastTime = 0;
 	private SnakeElem snHead;
 	private boolean flag;
@@ -32,9 +32,7 @@ public class Mouse {
 	}
 	public void render(Graphics g, SnakeField io) {
 		nowTime = System.currentTimeMillis();
-		snHead = Snake.sl.get(0);
-		if(snHead.x == mx / Cnst.FCELL && snHead.y == my / Cnst.FCELL) 
-			mouseDead = true;
+		SnakeField.snake.render(g, io, this);
 		if(!mouseDead) {
 			g.drawImage(io.imgmouse, mx, my, mx + Cnst.FCELL, my + Cnst.FCELL, imx, imy, imx + 51, imy + 51, io);
 			if(nowTime - lastTime > 100) {
@@ -44,6 +42,6 @@ public class Mouse {
 				lastTime = nowTime;
 			}
 		}
-		SnakeField.snake.render(g, io, this);
+		
 	}
 }

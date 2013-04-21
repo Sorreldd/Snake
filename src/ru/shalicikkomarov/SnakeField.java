@@ -41,7 +41,8 @@ public class SnakeField extends JPanel {
 		for(int i = 0; i < 16; i++)
 			for(int j = 0; j < 12; j++) 
 				g.drawRect(i * Cnst.FCELL, j * Cnst.FCELL, Cnst.FCELL, Cnst.FCELL);
-		if(!mouse.mouseDead) mouse.render(g, this);
-		else mouse = new Mouse();
+		mouse.render(g, this);
+		GameOver = snake.isOver();
+		if(mouse.mouseDead)mouse = new Mouse();
 	}
 }
