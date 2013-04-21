@@ -59,6 +59,11 @@ public class MainFrame extends JFrame {
 				}
 				Snake.sl.set(0, elem);
 			}
+			if(SnakeField.GameOver && key == KeyEvent.VK_ENTER) {
+				SnakeField.GameOver = false;
+				SnakeField.snake = new Snake();
+				new Thread(new SnakeThread()).start();
+			}
 		}
 		@Override
 		public void keyReleased(KeyEvent arg0) {

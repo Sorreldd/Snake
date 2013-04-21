@@ -10,8 +10,17 @@ public class Snake {
 	public static boolean isMove;
 	
 	public Snake() {
+		sl.clear();
+		for(int i = 0; i < 16; i++)
+			for(int j = 0; j < 12; j++)
+				SnakeField.state[i][j] = 0;
+		nowTime = 0;
+		lastTime = 0;
 		sl.add(new SnakeElem(1, 0, 1));
 		sl.add(new SnakeElem(0, 0, 1));
+		SnakeField.state[1][0] = 0;
+		SnakeField.state[0][0] = 0;
+		SnakeField.mouse = new Mouse();
 		isMove = true;
 	}
 	public void render(Graphics g, SnakeField io, Mouse mikki) {
@@ -35,7 +44,6 @@ public class Snake {
 		}
 		
 	}
-
 	private void move() {
 		for(int i = 0; i < sl.size(); i++) {
 			e = sl.get(i);

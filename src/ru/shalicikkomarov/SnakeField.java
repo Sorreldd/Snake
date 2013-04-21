@@ -10,15 +10,15 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class SnakeField extends JPanel {
-	private static BufferedImage img;
+	private static BufferedImage img, gameover;
 	public static BufferedImage imgmouse;
 	private int backWidth, backHeight;
 	private File file;
 	private URL url;
 	public static int state[][] = new int[16][12];
-	Mouse mouse;
+	static Mouse mouse;
 	static Snake snake;
-	boolean GameOver;
+	static boolean GameOver;
 	
 	public SnakeField() throws IOException {
 		this.setPreferredSize(new Dimension(Cnst.FWIDTH, Cnst.FHEIGHT));
@@ -30,7 +30,9 @@ public class SnakeField extends JPanel {
 		url = this.getClass().getResource("res/spmouse.png");
 		file = new File(url.getPath());
 		imgmouse = ImageIO.read(file);
-		mouse = new Mouse();
+		url = this.getClass().getResource("res/gameover.jpg");
+		file = new File(url.getPath());
+		gameover = ImageIO.read(file);
 		snake = new Snake();
 		GameOver = false;
 	}
@@ -43,6 +45,11 @@ public class SnakeField extends JPanel {
 				g.drawRect(i * Cnst.FCELL, j * Cnst.FCELL, Cnst.FCELL, Cnst.FCELL);
 		mouse.render(g, this);
 		GameOver = snake.isOver();
+		if(GameOver) {
+			g.drawImage(gameover, 0, 0, Cnst.FWIDTH, Cnst.FHEIGHT, 0, 0, gameover.getWidth(), gameover.getHeight(), this); 
+			g.setColor(Color.RED);
+			g.drawString("Press ENTER to continue...", 330, 500);
+		}
 		if(mouse.mouseDead)mouse = new Mouse();
 	}
 }
