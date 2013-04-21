@@ -1,5 +1,6 @@
 package ru.shalicikkomarov;
 
+
 import java.awt.*;
 import java.util.Random;
 
