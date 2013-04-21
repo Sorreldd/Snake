@@ -7,7 +7,6 @@ import java.util.Random;
 public class Mouse {
 	public int imx, imy, mx, my, k, ncadr;
 	private long nowTime = 0, lastTime = 0;
-	private SnakeElem snHead;
 	private boolean flag;
 	public boolean mouseDead;
 	Random r = new Random();
