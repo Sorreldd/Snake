@@ -1,12 +1,12 @@
 package ru.shalicikkomarov;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 import java.util.Random;
 
 public class Mouse {
-	int mx, my, k;
+	private int imx, imy, mx, my, k, ncadr;
+	private long nowTime = 0, lastTime = 0;
+	private boolean flag;
 	Random r = new Random();
 	Point points[] = new Point[16 * 12];
 	public Mouse() {
@@ -20,9 +20,22 @@ public class Mouse {
 			}
 		}
 		k = r.nextInt(k);
+		mx = points[k].x * Cnst.FCELL;
+		my = points[k].y * Cnst.FCELL;
+		imx = 0;
+		imy = 0;
+		ncadr = 0;
+		flag = true;
 	}
-	public void render(Graphics g) {
-		g.setColor(Color.RED);
-		g.drawOval(points[k].x * Cnst.FCELL, points[k].y * Cnst.FCELL, Cnst.FCELL, Cnst.FCELL);
+	public void render(Graphics g, SnakeField io) {
+		nowTime = System.currentTimeMillis();
+		g.drawImage(io.imgmouse, mx, my, mx + Cnst.FCELL, my + Cnst.FCELL, imx, imy, imx + 51, imy + 51, io);
+		if(nowTime - lastTime > 100) {
+			if(flag) ncadr++; else ncadr--;
+			imx = Math.min(8 * 52, ncadr * 52);
+			if(ncadr == 0 || ncadr == 25) flag = !flag;
+			lastTime = nowTime;
+		}
+		SnakeField.snake.render(g, io);
 	}
 }

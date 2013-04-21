@@ -16,6 +16,7 @@ public class MainFrame extends JFrame {
         this.pack();
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        new Thread(new SnakeThread()).start();
 	}
     
 	public static void main(String[] args) {
@@ -34,7 +35,9 @@ public class MainFrame extends JFrame {
     class SnakeThread implements Runnable{
         @Override
         public void run() {
-            
+            while(!snakeField.GameOver) {
+            	snakeField.repaint();
+            }
         }
     }
 }
